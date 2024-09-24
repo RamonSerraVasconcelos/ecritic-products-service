@@ -1,0 +1,18 @@
+server:
+  port: 8083
+  error:
+    include-stacktrace: never
+spring:
+  datasource:
+    url: ${ECRITIC_DB_URL:jdbc:postgresql://localhost:5433/ecritic}
+    username: ${ECRITIC_DB_USERNAME:root}
+    password: ${ECRITIC_DB_PASSWORD:root}
+  jpa:
+    database: POSTGRESQL
+  error:
+    include-stacktrace: never
+  data:
+    redis:
+      host: ${REDIS_HOST:127.0.0.1}
+      port: ${REDIS_PORT:6380}
+      password: ${REDIS_PASSWORD:af1ce60c0f7}
