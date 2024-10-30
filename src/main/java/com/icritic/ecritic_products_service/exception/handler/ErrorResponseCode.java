@@ -16,7 +16,8 @@ public enum ErrorResponseCode {
     ECRITICPROD_07("ECRITICPROD-07", "Unauthorized", "Invalid authorization token"),
     ECRITICPROD_08("ECRITICPROD-08", "Forbidden access", "Forbidden access to the requested resource"),
     ECRITICPROD_09("ECRITICPROD-09", "Internal server error", "An internal error occured while executing this operation"),
-    ECRITICPROD_10("ECRITICPROD-10", "Brand conflict", "A brand with the requested name already exists");
+    ECRITICPROD_10("ECRITICPROD-10", "Brand conflict", "A brand with the requested name already exists"),
+    ECRITICPROD_11("ECRITICPROD-11", "Brand not found", "The requested brand does not exist");
 
     private final String code;
     private final String message;
