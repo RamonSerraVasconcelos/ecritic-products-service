@@ -1,4 +1,4 @@
-CREATE TABLE brand
+CREATE TABLE brands
 (
     id          BIGSERIAL NOT NULL,
     name        varchar(200),
@@ -6,7 +6,7 @@ CREATE TABLE brand
     PRIMARY KEY (id)
 );
 
-CREATE TABLE category
+CREATE TABLE categories
 (
     id          BIGSERIAL NOT NULL,
     name        VARCHAR(100),
@@ -16,29 +16,29 @@ CREATE TABLE category
     PRIMARY KEY (id)
 );
 
-CREATE TABLE product
+CREATE TABLE products
 (
     id          BIGSERIAL NOT NULL,
     name        VARCHAR(500),
     category_id INT,
     description VARCHAR(1000),
     brand_id    INT,
-    about       VARCHAR(200),
     PRIMARY KEY (id),
     CONSTRAINT fk_prod_brand FOREIGN KEY (brand_id) REFERENCES brand (id),
     CONSTRAINT fk_prod_prodcategory FOREIGN KEY (category_id) REFERENCES category (id)
 );
 
-CREATE TABLE product_item
+CREATE TABLE product_items
 (
     id         BIGSERIAL NOT NULL,
     product_id INT,
     price      NUMERIC(10, 2),
+    quantity   INT,
     PRIMARY KEY (id),
     CONSTRAINT fk_proditem_product FOREIGN KEY (product_id) REFERENCES product (id)
 );
 
-CREATE TABLE product_image
+CREATE TABLE product_images
 (
     id              BIGSERIAL NOT NULL,
     image_url       VARCHAR(400),
@@ -49,7 +49,7 @@ CREATE TABLE product_image
     CONSTRAINT fk_prodimage_productitem FOREIGN KEY (product_item_id) REFERENCES product_item (id)
 );
 
-CREATE TABLE variation
+CREATE TABLE variations
 (
     id          BIGSERIAL NOT NULL,
     category_id INT,
@@ -58,7 +58,7 @@ CREATE TABLE variation
     CONSTRAINT fk_category_id FOREIGN KEY (category_id) REFERENCES category (id)
 );
 
-CREATE TABLE variation_option
+CREATE TABLE variation_options
 (
     id           BIGSERIAL NOT NULL,
     variation_id INT,
@@ -67,7 +67,7 @@ CREATE TABLE variation_option
     CONSTRAINT fk_variation_id FOREIGN KEY (variation_id) REFERENCES variation (id)
 );
 
-CREATE TABLE product_configuration
+CREATE TABLE product_configurations
 (
     product_item_id     INT,
     variation_option_id INT,

@@ -2,6 +2,8 @@ server:
   port: 8083
   error:
     include-stacktrace: never
+  servlet:
+    context-path: /products
 spring:
   datasource:
     url: ${ECRITIC_DB_URL:jdbc:postgresql://localhost:5433/ecritic}
