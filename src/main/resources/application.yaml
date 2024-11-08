@@ -18,3 +18,10 @@ spring:
       host: ${REDIS_HOST:127.0.0.1}
       port: ${REDIS_PORT:6380}
       password: ${REDIS_PASSWORD:af1ce60c0f7}
+
+application:
+  properties:
+    redis:
+      brand-expiration-time: 1440
+      brands-expiration-time: 60
+      brands-count-expiration-time: 60

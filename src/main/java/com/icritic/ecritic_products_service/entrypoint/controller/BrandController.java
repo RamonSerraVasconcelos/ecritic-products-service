@@ -2,8 +2,8 @@ package com.icritic.ecritic_products_service.entrypoint.controller;
 
 import com.icritic.ecritic_products_service.core.model.Brand;
 import com.icritic.ecritic_products_service.core.model.enums.Role;
-import com.icritic.ecritic_products_service.core.usecase.CreateBrandUseCase;
-import com.icritic.ecritic_products_service.core.usecase.UpdateBrandUseCase;
+import com.icritic.ecritic_products_service.core.usecase.brand.CreateBrandUseCase;
+import com.icritic.ecritic_products_service.core.usecase.brand.UpdateBrandUseCase;
 import com.icritic.ecritic_products_service.core.usecase.ValidateUserRoleUseCase;
 import com.icritic.ecritic_products_service.entrypoint.dto.AuthorizationTokenData;
 import com.icritic.ecritic_products_service.entrypoint.dto.BrandRequestDto;
@@ -16,6 +16,7 @@ import jakarta.validation.Validator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -77,5 +78,10 @@ public class BrandController {
         Brand brand = updateBrandUseCase.execute(id, brandDtoMapper.brandRequestDtoToBrand(brandRequestDto));
 
         return ResponseEntity.ok().body(brandDtoMapper.brandToBrandResponseDto(brand));
+    }
+
+    @GetMapping
+    public ResponseEntity<Set<BrandResponseDto>> getBrands() {
+        return ResponseEntity.ok().body(brandDtoMapper.brandsToBrandResponseDtos(createBrandUseCase.getBrands()));
     }
 }

@@ -1,8 +1,8 @@
-package com.icritic.ecritic_products_service.core.usecase;
+package com.icritic.ecritic_products_service.core.usecase.brand;
 
 import com.icritic.ecritic_products_service.core.model.Brand;
-import com.icritic.ecritic_products_service.core.usecase.boundary.FindBrandByIdBoundary;
-import com.icritic.ecritic_products_service.core.usecase.boundary.SaveBrandBoundary;
+import com.icritic.ecritic_products_service.core.usecase.brand.boundary.FindBrandByIdBoundary;
+import com.icritic.ecritic_products_service.core.usecase.brand.boundary.SaveBrandBoundary;
 import com.icritic.ecritic_products_service.exception.DefaultException;
 import com.icritic.ecritic_products_service.exception.EntityNotFoundException;
 import com.icritic.ecritic_products_service.exception.InternalErrorException;

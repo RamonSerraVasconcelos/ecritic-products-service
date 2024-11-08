@@ -1,7 +1,7 @@
 package com.icritic.ecritic_products_service.dataprovider.database.impl;
 
 import com.icritic.ecritic_products_service.core.model.Brand;
-import com.icritic.ecritic_products_service.core.usecase.boundary.FindBrandByNameBoundary;
+import com.icritic.ecritic_products_service.core.usecase.brand.boundary.FindBrandByNameBoundary;
 import com.icritic.ecritic_products_service.dataprovider.database.entity.BrandEntity;
 import com.icritic.ecritic_products_service.dataprovider.database.mapper.BrandEntityMapper;
 import com.icritic.ecritic_products_service.dataprovider.database.repository.BrandEntityRepository;
