@@ -27,18 +27,22 @@ public class FindBrandByIdUseCase {
 
     public Brand execute(Long id) {
         try {
-            Optional<Brand> cachedBrand = findBrandByIdBoundary.execute(id);
+            Optional<Brand> cachedBrand = findCachedBrandBoundary.execute(id);
 
             if (cachedBrand.isPresent()) {
                 log.info("Returning brand from cache");
                 return cachedBrand.get();
             }
 
-            Optional<Brand> brand = findCachedBrandBoundary.execute(id);
+            Optional<Brand> brand = findBrandByIdBoundary.execute(id);
 
             if (brand.isEmpty()) {
                 throw new EntityNotFoundException(ErrorResponseCode.ECRITICPROD_11);
             }
+
+            cacheBrandBoundary.execute(brand.get());
+
+            log.info("Brand not found on cache, returning from database");
 
             return brand.get();
         } catch (DefaultException ex) {

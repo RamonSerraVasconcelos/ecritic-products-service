@@ -21,7 +21,7 @@ public class CacheBrandGateway implements CacheBrandBoundary {
 
     private final ObjectMapper objectMapper;
 
-    private RedisCacheProperties redisCacheProperties;
+    private final RedisCacheProperties redisCacheProperties;
 
     public void execute(Brand brand) {
         String cacheKey = CacheKeys.BRAND_KEY.buildKey(brand.getId().toString());

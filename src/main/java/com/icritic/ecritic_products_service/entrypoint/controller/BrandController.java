@@ -4,6 +4,7 @@ import com.icritic.ecritic_products_service.core.model.Brand;
 import com.icritic.ecritic_products_service.core.model.BrandFilter;
 import com.icritic.ecritic_products_service.core.model.enums.Role;
 import com.icritic.ecritic_products_service.core.usecase.brand.CreateBrandUseCase;
+import com.icritic.ecritic_products_service.core.usecase.brand.FindBrandByIdUseCase;
 import com.icritic.ecritic_products_service.core.usecase.brand.FindBrandsUseCase;
 import com.icritic.ecritic_products_service.core.usecase.brand.UpdateBrandUseCase;
 import com.icritic.ecritic_products_service.core.usecase.ValidateUserRoleUseCase;
@@ -54,6 +55,8 @@ public class BrandController {
     private final UpdateBrandUseCase updateBrandUseCase;
 
     private final FindBrandsUseCase findBrandsUseCase;
+
+    private final FindBrandByIdUseCase findBrandByIdUseCase;
 
     @PostMapping
     public ResponseEntity<BrandResponseDto> createBrand(@RequestHeader("Authorization") String authorization,
@@ -116,5 +119,12 @@ public class BrandController {
                 .build();
 
         return ResponseEntity.status(HttpStatus.OK).body(pageableResponse);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<BrandResponseDto> getBrand(@PathVariable("id") Long id) {
+        Brand brand =findBrandByIdUseCase.execute(id);
+
+        return ResponseEntity.status(HttpStatus.OK).body(brandDtoMapper.brandToBrandResponseDto(brand));
     }
 }

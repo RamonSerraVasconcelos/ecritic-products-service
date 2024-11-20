@@ -38,7 +38,7 @@ public class CountBrandsUseCase {
 
             Long count = countBrandsBoundary.execute(brandFilter);
 
-            cacheBrandsCountBoundary.execute(count);
+            if (brandFilter.isCacheable()) cacheBrandsCountBoundary.execute(count);
 
             return count;
         } catch (DefaultException ex) {
