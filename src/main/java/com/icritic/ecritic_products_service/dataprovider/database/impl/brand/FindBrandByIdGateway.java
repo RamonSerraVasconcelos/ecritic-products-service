@@ -1,4 +1,4 @@
-package com.icritic.ecritic_products_service.dataprovider.database.impl;
+package com.icritic.ecritic_products_service.dataprovider.database.impl.brand;
 
 import com.icritic.ecritic_products_service.core.model.Brand;
 import com.icritic.ecritic_products_service.core.usecase.brand.boundary.FindBrandByIdBoundary;

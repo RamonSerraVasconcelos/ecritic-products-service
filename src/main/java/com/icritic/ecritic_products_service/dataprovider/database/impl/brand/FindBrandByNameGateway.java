@@ -1,26 +1,26 @@
-package com.icritic.ecritic_products_service.dataprovider.database.impl;
+package com.icritic.ecritic_products_service.dataprovider.database.impl.brand;
 
 import com.icritic.ecritic_products_service.core.model.Brand;
-import com.icritic.ecritic_products_service.core.usecase.brand.boundary.SaveBrandBoundary;
+import com.icritic.ecritic_products_service.core.usecase.brand.boundary.FindBrandByNameBoundary;
 import com.icritic.ecritic_products_service.dataprovider.database.entity.BrandEntity;
 import com.icritic.ecritic_products_service.dataprovider.database.mapper.BrandEntityMapper;
 import com.icritic.ecritic_products_service.dataprovider.database.repository.BrandEntityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 @RequiredArgsConstructor
-public class SaveBrandGateway implements SaveBrandBoundary {
+public class FindBrandByNameGateway implements FindBrandByNameBoundary {
 
     private final BrandEntityMapper brandEntityMapper;
 
     private final BrandEntityRepository brandEntityRepository;
 
-    public Brand execute(Brand brand) {
-        BrandEntity brandEntity = brandEntityMapper.brandToBrandEntity(brand);
+    public Optional<Brand> execute(String name) {
+        BrandEntity brandEntity = brandEntityRepository.findByName(name);
 
-        BrandEntity savedBrandEntity = brandEntityRepository.save(brandEntity);
-
-        return brandEntityMapper.brandEntityToBrand(savedBrandEntity);
+        return Optional.ofNullable(brandEntity).map(brandEntityMapper::brandEntityToBrand);
     }
 }
