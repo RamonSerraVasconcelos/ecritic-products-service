@@ -2,6 +2,7 @@ package com.icritic.ecritic_products_service.core.usecase.brand;
 
 import com.icritic.ecritic_products_service.core.model.Brand;
 import com.icritic.ecritic_products_service.core.usecase.brand.boundary.FindBrandByNameBoundary;
+import com.icritic.ecritic_products_service.core.usecase.brand.boundary.InvalidateBrandsCacheBoundary;
 import com.icritic.ecritic_products_service.core.usecase.brand.boundary.SaveBrandBoundary;
 import com.icritic.ecritic_products_service.exception.BusinessViolationException;
 import com.icritic.ecritic_products_service.exception.DefaultException;
@@ -22,6 +23,8 @@ public class CreateBrandUseCase {
 
     private final SaveBrandBoundary saveBrandBoundary;
 
+    private final InvalidateBrandsCacheBoundary invalidateBrandsCacheBoundary;
+
     public Brand execute(Brand brand) {
         try {
             Optional<Brand> optionalBrand = findBrandByNameBoundary.execute(brand.getName());
@@ -30,7 +33,11 @@ public class CreateBrandUseCase {
                 throw new BusinessViolationException(ErrorResponseCode.ECRITICPROD_10);
             }
 
-            return saveBrandBoundary.execute(brand);
+            Brand createdBrand = saveBrandBoundary.execute(brand);
+
+            invalidateBrandsCacheBoundary.execute();
+
+            return createdBrand;
         } catch (DefaultException ex) {
             log.error("Error creating brand. Exception: [{}]", ex.getErrorResponse());
             throw ex;

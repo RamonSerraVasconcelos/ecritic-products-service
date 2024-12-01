@@ -2,6 +2,8 @@ package com.icritic.ecritic_products_service.core.usecase.brand;
 
 import com.icritic.ecritic_products_service.core.model.Brand;
 import com.icritic.ecritic_products_service.core.usecase.brand.boundary.FindBrandByIdBoundary;
+import com.icritic.ecritic_products_service.core.usecase.brand.boundary.InvalidateBrandCacheBoundary;
+import com.icritic.ecritic_products_service.core.usecase.brand.boundary.InvalidateBrandsCacheBoundary;
 import com.icritic.ecritic_products_service.core.usecase.brand.boundary.SaveBrandBoundary;
 import com.icritic.ecritic_products_service.exception.DefaultException;
 import com.icritic.ecritic_products_service.exception.EntityNotFoundException;
@@ -22,6 +24,10 @@ public class UpdateBrandUseCase {
 
     private final SaveBrandBoundary saveBrandBoundary;
 
+    private final InvalidateBrandCacheBoundary invalidateBrandCacheBoundary;
+
+    private final InvalidateBrandsCacheBoundary invalidateBrandsCacheBoundary;
+
     public Brand execute(Long id, Brand brand) {
         log.info("Updating brand with id: [{}]", id);
 
@@ -37,7 +43,12 @@ public class UpdateBrandUseCase {
             brandToBeUpdated.setName(brand.getName());
             brandToBeUpdated.setDescription(brand.getDescription());
 
-            return saveBrandBoundary.execute(brandToBeUpdated);
+            Brand updatedBrand = saveBrandBoundary.execute(brandToBeUpdated);
+
+            invalidateBrandCacheBoundary.execute(id);
+            invalidateBrandsCacheBoundary.execute();
+
+            return updatedBrand;
         } catch (DefaultException ex) {
             log.error("Error updating brand. Exception: [{}]", ex.getErrorResponse());
             throw ex;
