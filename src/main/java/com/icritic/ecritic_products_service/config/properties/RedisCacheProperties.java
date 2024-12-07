@@ -14,4 +14,6 @@ public class RedisCacheProperties {
     private int brandExpirationTime;
     private int brandsExpirationTime;
     private int brandsCountExpirationTime;
+    private int categoryExpirationTime;
+    private int categoriesExpirationTime;
 }
