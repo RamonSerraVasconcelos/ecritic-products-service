@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.OffsetDateTime;
 import java.util.Optional;
 
 @Service
@@ -32,6 +33,9 @@ public class CreateBrandUseCase {
             if (optionalBrand.isPresent()) {
                 throw new EntityConflictException(ErrorResponseCode.ECRITICPROD_10);
             }
+
+            brand.setCreatedAt(OffsetDateTime.now());
+            brand.setUpdatedAt(OffsetDateTime.now());
 
             Brand createdBrand = saveBrandBoundary.execute(brand);
 

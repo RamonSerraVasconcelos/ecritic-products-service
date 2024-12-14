@@ -18,7 +18,7 @@ public class BrandEntityCustomRepositoryImpl implements BrandEntityCustomReposit
 
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
-    private static final String SELECT = "SELECT b.id, b.name, b.description FROM brands b";
+    private static final String SELECT = "SELECT b.id, b.name, b.description, b.created_at, b.updated_at FROM brands b";
 
     private static final String SELECT_COUNT = "SELECT COUNT(b.id) FROM brands b";
 

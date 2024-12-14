@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.OffsetDateTime;
 import java.util.Optional;
 
 @Service
@@ -34,6 +35,9 @@ public class CreateCategoryUseCase {
             if (optionalCategory.isPresent()) {
                 throw new EntityConflictException(ErrorResponseCode.ECRITICPROD_12);
             }
+
+            category.setCreatedAt(OffsetDateTime.now());
+            category.setUpdatedAt(OffsetDateTime.now());
 
             Category cratedCategory = saveCategoryBoundary.execute(category);
 

@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.OffsetDateTime;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -16,4 +18,6 @@ public class CategoryResponseDto {
     private Long id;
     private String name;
     private String description;
+    private OffsetDateTime createdAt;
+    private OffsetDateTime updatedAt;
 }

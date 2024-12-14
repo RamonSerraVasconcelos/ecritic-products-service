@@ -6,7 +6,7 @@ server:
     context-path: /products
 spring:
   datasource:
-    url: ${ECRITIC_DB_URL:jdbc:postgresql://localhost:5433/ecritic}
+    url: ${ECRITIC_DB_URL:jdbc:postgresql://localhost:5433/ecritic_products}
     username: ${ECRITIC_DB_USERNAME:root}
     password: ${ECRITIC_DB_PASSWORD:root}
   jpa:

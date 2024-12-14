@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 
 @Builder
@@ -19,4 +20,6 @@ public class Category {
     private String name;
     private String description;
     private Long parentId;
+    private OffsetDateTime createdAt;
+    private OffsetDateTime updatedAt;
 }
