@@ -11,7 +11,9 @@ public enum CacheKeys {
     BRANDS_COUNT_KEY("brands-count"),
     BRAND_KEY("brand:%s"),
     CATEGORIES_KEY("categories:%s:%s"),
-    CATEGORY_KEY("category:%s");
+    CATEGORY_KEY("category:%s"),
+    PRODUCTS_KEY("products:%s:%s"),
+    PRODUCT_KEY("product:%s");
 
     private final String key;
 

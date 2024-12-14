@@ -1,0 +1,30 @@
+package com.icritic.ecritic_products_service.entrypoint.dto;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.icritic.ecritic_products_service.core.model.Brand;
+import com.icritic.ecritic_products_service.core.model.Category;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.time.OffsetDateTime;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@Builder
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class ProductResponseDto {
+
+    private Long id;
+    private Brand brand;
+    private Category category;
+    private String name;
+    private String description;
+    private boolean active;
+    private OffsetDateTime createdAt;
+    private OffsetDateTime updatedAt;
+}
