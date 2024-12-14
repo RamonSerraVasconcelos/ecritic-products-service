@@ -18,9 +18,9 @@ public class InvalidatePaginationCache {
 
     private final Jedis jedis;
 
-    public void execute(String cacheKeyPrefix) {
+    public void execute(CacheKeys cacheKeys) {
         ScanParams scanParams = new ScanParams();
-        scanParams.match(cacheKeyPrefix + "*");
+        scanParams.match(cacheKeys.getKey().split(":")[0].concat("*"));
 
         Set<String> keysToDelete = new HashSet<>();
         String nextCursor = "0";

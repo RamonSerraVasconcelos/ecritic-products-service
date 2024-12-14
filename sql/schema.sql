@@ -23,10 +23,11 @@ CREATE TABLE categories
 CREATE TABLE products
 (
     id          BIGSERIAL NOT NULL,
-    name        VARCHAR(500),
+    name        VARCHAR(200),
     category_id INT,
     brand_id    INT,
     description VARCHAR(1000),
+    active      BOOLEAN,
     created_at  TIMESTAMP,
     updated_at  TIMESTAMP,
     PRIMARY KEY (id),
@@ -47,7 +48,7 @@ CREATE TABLE product_items
     CONSTRAINT fk_proditem_product FOREIGN KEY (product_id) REFERENCES products (id)
 );
 
-CREATE TYPE attribute AS ENUM (
+CREATE TYPE attributes AS ENUM (
     'COLOR',
     'SIZE',
     'WEIGHT'

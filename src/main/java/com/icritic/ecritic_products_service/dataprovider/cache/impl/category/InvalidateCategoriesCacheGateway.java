@@ -16,8 +16,10 @@ public class InvalidateCategoriesCacheGateway implements InvalidateCategoriesCac
 
     @Override
     public void execute() {
+        log.info("Invalidating categories cache");
+
         try {
-            invalidatePaginationCache.execute(CacheKeys.CATEGORIES_KEY.getKey());
+            invalidatePaginationCache.execute(CacheKeys.CATEGORIES_KEY);
         } catch (Exception ex) {
             log.error("Error invalidating categories cache", ex);
         }

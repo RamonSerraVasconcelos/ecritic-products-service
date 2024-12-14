@@ -27,6 +27,8 @@ public class CreateBrandUseCase {
     private final InvalidateBrandsCacheBoundary invalidateBrandsCacheBoundary;
 
     public Brand execute(Brand brand) {
+        log.info("Creating brand with name: [{}]", brand.getName());
+
         try {
             Optional<Brand> optionalBrand = findBrandByNameBoundary.execute(brand.getName());
 

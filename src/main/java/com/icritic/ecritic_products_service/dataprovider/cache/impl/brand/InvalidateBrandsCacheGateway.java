@@ -16,8 +16,10 @@ public class InvalidateBrandsCacheGateway implements InvalidateBrandsCacheBounda
 
     @Override
     public void execute() {
+        log.info("Invalidating brands cache");
+
         try {
-            invalidatePaginationCache.execute(CacheKeys.BRANDS_KEY.getKey());
+            invalidatePaginationCache.execute(CacheKeys.BRANDS_KEY);
         } catch (Exception ex) {
             log.error("Error invalidating brands cache", ex);
         }
