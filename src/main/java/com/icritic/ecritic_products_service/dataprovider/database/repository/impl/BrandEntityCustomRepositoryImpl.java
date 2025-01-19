@@ -49,9 +49,8 @@ public class BrandEntityCustomRepositoryImpl implements BrandEntityCustomReposit
             String name = brandFilter.getName();
             String trimmedName = name.substring(0, name.lastIndexOf(name.trim()) + name.trim().length()).replace(" ", " & ");
 
-            params.addValue("name", trimmedName);
-
             queryBuilder.append(" WHERE to_tsvector(b.name) @@ to_tsquery(:name)");
+            params.addValue("name", trimmedName);
         }
     }
 
