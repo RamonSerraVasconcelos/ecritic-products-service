@@ -13,7 +13,8 @@ public enum CacheKeys {
     CATEGORIES_KEY("categories:%s:%s"),
     CATEGORY_KEY("category:%s"),
     PRODUCTS_KEY("products:%s:%s"),
-    PRODUCT_KEY("product:%s");
+    PRODUCT_KEY("product:%s"),
+    PRODUCTS_COUNT_KEY("products-count");
 
     private final String key;
 

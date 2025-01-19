@@ -27,3 +27,6 @@ application:
       brands-count-expiration-time: 60
       category-expiration-time: 1440
       categories-expiration-time: 60
+      product-expiration-time: 1440
+      products-expiration-time: 60
+      products-count-expiration-time: 60
