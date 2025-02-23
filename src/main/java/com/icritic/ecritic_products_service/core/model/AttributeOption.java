@@ -14,7 +14,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class AttributeOption {
 
-    private long id;
+    private Long id;
     private Attribute attribute;
     private String value;
 }

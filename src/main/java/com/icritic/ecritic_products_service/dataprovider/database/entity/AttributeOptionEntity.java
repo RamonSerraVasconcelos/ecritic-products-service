@@ -26,7 +26,7 @@ public class AttributeOptionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false)
-    private long id;
+    private Long id;
 
     @Enumerated(EnumType.STRING)
     private AttributeEntity attribute;
