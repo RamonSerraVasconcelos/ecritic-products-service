@@ -38,6 +38,8 @@ public class ItemEntity {
     @JoinColumn(name = "product_id")
     private ProductEntity product;
 
+    private String name;
+
     private String sku;
 
     private BigDecimal price;

@@ -22,8 +22,11 @@ public enum ErrorResponseCode {
     ECRITICPROD_13("ECRITICPROD-13", "Category not found", "The requested category does not exist"),
     ECRITICPROD_14("ECRITICPROD-14", "Product conflict", "A product with the requested name already exists"),
     ECRITICPROD_15("ECRITICPROD-15", "Product not found", "The requested product does not exist"),
-    ECRITICPROD_16("ECRITICPROD-16", "Attribute conflict", "An attribute with the requested name already exists"),
-    ECRITICPROD_17("ECRITICPROD-17", "Attribute not found", "The requested attribute does not exist");
+    ECRITICPROD_16("ECRITICPROD-16", "Attribute conflict", "The attribute option already exists"),
+    ECRITICPROD_17("ECRITICPROD-17", "Attribute not found", "The requested attribute does not exist"),
+    ECRITICPROD_18("ECRITICPROD-18", "Item conflict", "An item with the requested SKU already exists"),
+    ECRITICPROD_19("ECRITICPROD-19", "Item not found", "The requested item does not exist"),
+    ECRITICPROD_20("ECRITICPROD-20", "Item without attributes", "Item must have at least one attribute");
 
     private final String code;
     private final String message;

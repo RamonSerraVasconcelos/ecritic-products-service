@@ -39,9 +39,11 @@ CREATE TABLE product_items
 (
     id         BIGSERIAL    NOT NULL,
     product_id INT,
+    name        VARCHAR(100) NOT NULL,
     sku        VARCHAR(100) NOT NULL UNIQUE,
     price      NUMERIC(10, 2),
     quantity   INT,
+    active     BOOLEAN,
     created_at TIMESTAMP,
     updated_at TIMESTAMP,
     PRIMARY KEY (id),
