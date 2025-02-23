@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.OffsetDateTime;
+
 @Builder
 @Getter
 @Setter
@@ -15,4 +17,6 @@ public class ItemAttribute {
 
     private Item item;
     private AttributeOption attributeOption;
+    private OffsetDateTime createdAt;
+    private OffsetDateTime updatedAt;
 }
