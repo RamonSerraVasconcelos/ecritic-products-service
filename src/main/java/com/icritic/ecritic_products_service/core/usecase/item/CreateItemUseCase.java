@@ -2,9 +2,11 @@ package com.icritic.ecritic_products_service.core.usecase.item;
 
 import com.icritic.ecritic_products_service.core.model.AttributeOption;
 import com.icritic.ecritic_products_service.core.model.Item;
+import com.icritic.ecritic_products_service.core.model.ItemAttribute;
 import com.icritic.ecritic_products_service.core.model.Product;
 import com.icritic.ecritic_products_service.core.usecase.item.boundary.FindAttributeOptionByIdBoundary;
 import com.icritic.ecritic_products_service.core.usecase.item.boundary.FindItemBySkuBoundary;
+import com.icritic.ecritic_products_service.core.usecase.item.boundary.SaveItemAttributeBoundary;
 import com.icritic.ecritic_products_service.core.usecase.item.boundary.SaveItemBoundary;
 import com.icritic.ecritic_products_service.core.usecase.product.FindProductByIdUseCase;
 import com.icritic.ecritic_products_service.exception.DefaultException;
@@ -33,6 +35,8 @@ public class CreateItemUseCase {
 
     private final SaveItemBoundary saveItemBoundary;
 
+    private final SaveItemAttributeBoundary saveItemAttributeBoundary;
+
     public Item execute(Item item, List<Long> attributeOptionIds) {
         log.info("Creating item for product: [{}]", item.getProduct().getId());
 
@@ -54,11 +58,23 @@ public class CreateItemUseCase {
                 throw new EntityConflictException(ErrorResponseCode.ECRITICPROD_18);
             }
 
+            OffsetDateTime dateNow = OffsetDateTime.now();
+
             item.setActive(true);
-            item.setCreatedAt(OffsetDateTime.now());
-            item.setUpdatedAt(OffsetDateTime.now());
+            item.setCreatedAt(dateNow);
+            item.setUpdatedAt(dateNow);
 
             Item createdItem = saveItemBoundary.execute(item);
+
+            attributeOptions.forEach(attributeOption -> {
+                ItemAttribute itemAttribute = ItemAttribute.builder()
+                        .item(createdItem)
+                        .attributeOption(attributeOption)
+                        .createdAt(dateNow)
+                        .updatedAt(dateNow)
+                        .build();
+                saveItemAttributeBoundary.execute(itemAttribute);
+            });
 
             return createdItem;
         } catch (DefaultException ex) {
