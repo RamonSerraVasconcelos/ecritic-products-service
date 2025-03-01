@@ -37,7 +37,7 @@ public class Item {
         }
 
         attributeOptions.forEach(attributeOption -> {
-            this.sku = this.sku.concat("-").concat(attributeOption.getId().toString());
+            this.sku = this.sku.concat("-").concat(attributeOption.getValue());
         });
     }
 }
