@@ -7,14 +7,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import static java.util.Objects.nonNull;
+
 @Builder
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
 public class AttributeOption {
 
     private Long id;
     private Attribute attribute;
     private String value;
+
+    public AttributeOption(Attribute attribute, String value) {
+        this.attribute = attribute;
+        this.value = value.toUpperCase();
+    }
 }

@@ -27,17 +27,14 @@ public class CreateAttributeOptionUseCase {
         log.info("Creating attribute option: [{} -> {}]", attribute.name(), value);
 
         try {
-            Optional<AttributeOption> optionalAttributeOption = findAttributeOptionBoundary.execute(attribute, value);
+            AttributeOption attributeOption = new AttributeOption(attribute, value);
+
+            Optional<AttributeOption> optionalAttributeOption = findAttributeOptionBoundary.execute(attributeOption.getAttribute(), attributeOption.getValue());
 
             if (optionalAttributeOption.isPresent()) {
                 log.error("Attribute option already exists");
                 throw new EntityConflictException(ErrorResponseCode.ECRITICPROD_16);
             }
-
-            AttributeOption attributeOption = AttributeOption.builder()
-                    .attribute(attribute)
-                    .value(value)
-                    .build();
 
             AttributeOption savedAttributeOption = saveAttributeOptionBoundary.execute(attributeOption);
 
