@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class FindAttributeOptionsUseCase {
 
-    private FindAttributeOptionsBoundary findAttributeOptionsBoundary;
+    private final FindAttributeOptionsBoundary findAttributeOptionsBoundary;
 
     public Page<AttributeOption> execute(Pageable pageable, Attribute attribute) {
         log.info("Finding attribute options for attribute: [{}]", attribute);

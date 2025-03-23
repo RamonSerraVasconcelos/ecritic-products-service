@@ -1,6 +1,7 @@
 package com.icritic.ecritic_products_service.core.usecase.item;
 
 import com.icritic.ecritic_products_service.core.model.AttributeOption;
+import com.icritic.ecritic_products_service.core.model.enums.Attribute;
 import com.icritic.ecritic_products_service.core.usecase.item.boundary.FindAttributeOptionBoundary;
 import com.icritic.ecritic_products_service.core.usecase.item.boundary.SaveAttributeOptionBoundary;
 import com.icritic.ecritic_products_service.exception.DefaultException;
@@ -22,16 +23,21 @@ public class CreateAttributeOptionUseCase {
 
     private final SaveAttributeOptionBoundary saveAttributeOptionBoundary;
 
-    public AttributeOption execute(AttributeOption attributeOption) {
-        log.info("Creating attribute option: [{}]", attributeOption.toString());
+    public AttributeOption execute(Attribute attribute, String value) {
+        log.info("Creating attribute option: [{} -> {}]", attribute.name(), value);
 
         try {
-            Optional<AttributeOption> optionalAttributeOption = findAttributeOptionBoundary.execute(attributeOption.getAttribute(), attributeOption.getValue());
+            Optional<AttributeOption> optionalAttributeOption = findAttributeOptionBoundary.execute(attribute, value);
 
             if (optionalAttributeOption.isPresent()) {
                 log.error("Attribute option already exists");
                 throw new EntityConflictException(ErrorResponseCode.ECRITICPROD_16);
             }
+
+            AttributeOption attributeOption = AttributeOption.builder()
+                    .attribute(attribute)
+                    .value(value)
+                    .build();
 
             AttributeOption savedAttributeOption = saveAttributeOptionBoundary.execute(attributeOption);
 
