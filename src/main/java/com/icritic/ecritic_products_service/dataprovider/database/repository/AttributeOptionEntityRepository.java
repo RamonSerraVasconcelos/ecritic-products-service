@@ -13,5 +13,5 @@ public interface AttributeOptionEntityRepository extends JpaRepository<Attribute
     AttributeOptionEntity findByAttributeAndValue(@Param("attribute") String attribute, @Param("value") String value);
 
     @Query(value = "SELECT * FROM attribute_options WHERE attribute = CAST(:attribute AS attributes)", nativeQuery = true)
-    Page<AttributeOptionEntity> findByAttribute(Pageable pageable, String attribute);
+    Page<AttributeOptionEntity> findByAttribute(Pageable pageable, @Param("attribute") String attribute);
 }
