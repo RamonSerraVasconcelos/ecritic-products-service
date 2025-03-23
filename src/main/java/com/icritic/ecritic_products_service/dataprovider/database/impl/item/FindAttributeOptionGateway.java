@@ -3,7 +3,6 @@ package com.icritic.ecritic_products_service.dataprovider.database.impl.item;
 import com.icritic.ecritic_products_service.core.model.AttributeOption;
 import com.icritic.ecritic_products_service.core.model.enums.Attribute;
 import com.icritic.ecritic_products_service.core.usecase.item.boundary.FindAttributeOptionBoundary;
-import com.icritic.ecritic_products_service.dataprovider.database.entity.AttributeEntity;
 import com.icritic.ecritic_products_service.dataprovider.database.entity.AttributeOptionEntity;
 import com.icritic.ecritic_products_service.dataprovider.database.mapper.AttributeOptionEntityMapper;
 import com.icritic.ecritic_products_service.dataprovider.database.repository.AttributeOptionEntityRepository;
@@ -22,7 +21,7 @@ public class FindAttributeOptionGateway implements FindAttributeOptionBoundary {
 
     @Override
     public Optional<AttributeOption> execute(Attribute attribute, String value) {
-        AttributeOptionEntity attributeOption = attributeOptionEntityRepository.findByAttributeAndValue(AttributeEntity.valueOf(attribute.name()), value);
+        AttributeOptionEntity attributeOption = attributeOptionEntityRepository.findByAttributeAndValue(attribute.name(), value);
 
         return Optional.ofNullable(attributeOption).map(attributeOptionEntityMapper::entityToModel);
     }

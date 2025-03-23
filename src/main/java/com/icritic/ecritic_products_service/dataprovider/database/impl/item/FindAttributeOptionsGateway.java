@@ -3,7 +3,6 @@ package com.icritic.ecritic_products_service.dataprovider.database.impl.item;
 import com.icritic.ecritic_products_service.core.model.AttributeOption;
 import com.icritic.ecritic_products_service.core.model.enums.Attribute;
 import com.icritic.ecritic_products_service.core.usecase.item.boundary.FindAttributeOptionsBoundary;
-import com.icritic.ecritic_products_service.dataprovider.database.entity.AttributeEntity;
 import com.icritic.ecritic_products_service.dataprovider.database.entity.AttributeOptionEntity;
 import com.icritic.ecritic_products_service.dataprovider.database.mapper.AttributeOptionEntityMapper;
 import com.icritic.ecritic_products_service.dataprovider.database.repository.AttributeOptionEntityRepository;
@@ -25,7 +24,7 @@ public class FindAttributeOptionsGateway implements FindAttributeOptionsBoundary
 
     @Override
     public Page<AttributeOption> execute(Pageable pageable, Attribute attribute) {
-        Page<AttributeOptionEntity> attributeOptionEntities = attributeOptionRepository.findByAttribute(pageable, AttributeEntity.valueOf(attribute.name()));
+        Page<AttributeOptionEntity> attributeOptionEntities = attributeOptionRepository.findByAttribute(pageable, attribute.name());
 
         List<AttributeOption> attributeOptions = attributeOptionEntities.getContent().stream().map(attributeOptionEntityMapper::entityToModel).toList();
 

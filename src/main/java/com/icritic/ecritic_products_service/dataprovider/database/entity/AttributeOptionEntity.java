@@ -28,8 +28,8 @@ public class AttributeOptionEntity {
     @Column(updatable = false)
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    private AttributeEntity attribute;
+    @Column(columnDefinition = "attributes")
+    private String attribute;
 
     @Column(nullable = false)
     private String value;

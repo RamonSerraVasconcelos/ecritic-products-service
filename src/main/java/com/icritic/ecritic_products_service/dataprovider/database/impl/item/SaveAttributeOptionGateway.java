@@ -20,7 +20,7 @@ public class SaveAttributeOptionGateway implements SaveAttributeOptionBoundary {
     public AttributeOption execute(AttributeOption attributeOption) {
         AttributeOptionEntity attributeOptionEntity = attributeOptionEntityMapper.modelToEntity(attributeOption);
 
-        AttributeOptionEntity savedAttributeOption = attributeOptionEntityRepository.save(attributeOptionEntity);
+        AttributeOptionEntity savedAttributeOption = attributeOptionEntityRepository.saveEntity(attributeOptionEntity);
 
         return attributeOptionEntityMapper.entityToModel(savedAttributeOption);
     }
