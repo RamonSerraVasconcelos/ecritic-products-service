@@ -37,11 +37,11 @@ public class CreateItemUseCase {
 
     private final SaveItemAttributeBoundary saveItemAttributeBoundary;
 
-    public Item execute(Item item, List<Long> attributeOptionIds) {
-        log.info("Creating item for product: [{}]", item.getProduct().getId());
+    public Item execute(Long productId, Item item, List<Long> attributeOptionIds) {
+        log.info("Creating item for product: [{}]", productId);
 
         try {
-            Product product = findProductByIdUseCase.execute(item.getProduct().getId());
+            Product product = findProductByIdUseCase.execute(productId);
             item.setProduct(product);
 
             List<AttributeOption> attributeOptions = attributeOptionIds.stream()
@@ -60,7 +60,6 @@ public class CreateItemUseCase {
 
             OffsetDateTime dateNow = OffsetDateTime.now();
 
-            item.setActive(true);
             item.setCreatedAt(dateNow);
             item.setUpdatedAt(dateNow);
 

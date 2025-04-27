@@ -28,7 +28,7 @@ public class ItemAttributeEntity {
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "item_id")
+    @JoinColumn(name = "product_item_id")
     private ItemEntity item;
 
     @Id
