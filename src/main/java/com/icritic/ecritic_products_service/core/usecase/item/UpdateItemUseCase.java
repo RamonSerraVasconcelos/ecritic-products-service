@@ -23,7 +23,7 @@ public class UpdateItemUseCase {
 
     private final SaveItemBoundary saveItemBoundary;
 
-    public Item execute(Long id, String name, BigDecimal price, long quantity) {
+    public Item execute(Long id, String name, BigDecimal price, long quantity, boolean active) {
         log.info("Updating product with id: [{}]", id);
 
         try {
@@ -38,6 +38,7 @@ public class UpdateItemUseCase {
             item.setName(name);
             item.setPrice(price);
             item.setQuantity(quantity);
+            item.setActive(active);
 
             return saveItemBoundary.execute(item);
         } catch (DefaultException ex) {

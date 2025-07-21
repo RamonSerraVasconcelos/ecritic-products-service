@@ -124,4 +124,27 @@ public class ItemController {
 
         return ResponseEntity.status(HttpStatus.OK).body(pageableResponse);
     }
+
+    @PatchMapping("/{productId}/items/{id}")
+    public ResponseEntity<ItemResponseDto> updateItem(@RequestHeader("Authorization") String authorization,
+                                                      @PathVariable("productId") Long productId,
+                                                      @RequestBody ItemRequestDto itemRequestDto) {
+        AuthorizationTokenData authorizationTokenData = authorizationTokenDataMapper.map(authorization);
+        validateUserRoleUseCase.execute(EnumSet.of(Role.MODERATOR), authorizationTokenData.getUserRole());
+
+        Set<ConstraintViolation<ItemRequestDto>> violations = validator.validate(itemRequestDto);
+        if (!violations.isEmpty()) {
+            violations.forEach(violation -> {
+                if (!violation.getPropertyPath().toString().equals("attributeOptions")) {
+                    throw new ResourceViolationException(violation);
+                }
+            });
+        }
+
+        Item item = updateItemUseCase.execute(productId, itemRequestDto.getName(), itemRequestDto.getPrice(), itemRequestDto.getQuantity(), itemRequestDto.isActive());
+
+        ItemResponseDto itemResponseDto = itemDtoMapper.modelToResponse(item);
+
+        return ResponseEntity.status(HttpStatus.OK).body(itemResponseDto);
+    }
 }
